@@ -11,6 +11,7 @@
     <script src="model.js"></script>
     <script src="table_view.js"></script>
     <script src="table_controller.js"></script>
+    <script src="table.js"></script>
     <script>
      document.addEventListener("DOMContentLoaded", function(event) {
          init();
@@ -18,13 +19,8 @@
      function init() {
          var uri = "ws://localhost:7778";
          var socket = new WebSocket(uri);
-         var uid = 1;
          var table_next_id = 1;
-
-         /* handle_create_table */
-         var model = new $.Model();
-         var view = new $.TableView($("#parent"));
-         var controller = new $.TableController(model, view);
+         var tables = {};
 
          function send(msg) {
              socket.send(msg);
@@ -39,12 +35,15 @@
              if (r['method'] != 'create_table')
                  return false;
 
-             /* model.append(r['params']); */
-             view.setHeader(r['params'])
+             var table_id = table_next_id++;
+             var table = new $.Table(table_id);
+             table.setHeader(r['params'])
+             tables[table_id] = table;
+             console.log("table created: " + table_id);
              var response = {
                  "jsonrpc": "2.0",
                  "id": r['id'],
-                 "table_id": table_next_id++
+                 "table_id": table_id
              };
              var msg = JSON.stringify(response);
              console.log("handle_create_table: " + msg);
@@ -56,13 +55,14 @@
              var r = request;
              if (r['method'] != 'append_row')
                  return false;
-             
-             model.append(r['params']);
+
+             var table = tables[r['table_id']];
+             table.append(r['params']);
              var response = {
                  "jsonrpc": "2.0",
                  "id": r['id'],
                  "table_id": r['table_id'],
-                 "length": model.length()
+                 "length": table.length()
              };
              var msg = JSON.stringify(response);
              console.log("handle_append_row: " + msg);

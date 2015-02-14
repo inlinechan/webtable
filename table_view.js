@@ -1,8 +1,8 @@
 jQuery.extend({
-    TableView: function($parent, header) {
+    TableView: function($parent, table_id) {
         var that = this;
         var listeners = new Array();
-        var id = nextId()();
+        var id = table_id;
 
         var table = $("<table><thead><tr><th>Name</th><th>Address</th></tr></thead><tbody></tbody></table>").attr('id', 'table' + id).addClass('tableview');
         $parent.append(table);
@@ -15,13 +15,6 @@ jQuery.extend({
 
             dragObject(dom_element, dom_element);
         }
-
-        function nextId() {
-            var uid = 0;
-            return function() {
-                return uid++;
-            };
-        };
 
         this.setHeader = function(header) {
             var thead = $('#table'+id+' thead');

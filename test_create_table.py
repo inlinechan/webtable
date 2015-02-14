@@ -6,10 +6,19 @@ import websockets
 
 @asyncio.coroutine
 def producer():
-    r = [({'jsonrpc': '2.0', 'id': 1, 'method': 'create_table', 'params': ['Timestamp', 'Process Name', 'RSS']}, {'jsonrpc': '2.0', 'id': 1, 'table_id': 1}),
-         ({'jsonrpc': '2.0', 'id': 2, 'method': 'append_row', 'table_id': 1, 'params': ["123456789", "Chrome", "54321"]}, {"jsonrpc": "2.0", "id": 2, "table_id": 1, "length": 1}),
-         ({'jsonrpc': '2.0', 'id': 3, 'method': 'append_row', 'table_id': 1, 'params': ["123490000", "Chrome", "54321"]}, {"jsonrpc": "2.0", "id": 3, "table_id": 1, "length": 2}),
-         ({'jsonrpc': '2.0', 'id': 3, 'method': 'append_row', 'table_id': 1, 'params': ["123500000", "Chrome", "54321"]}, {"jsonrpc": "2.0", "id": 3, "table_id": 1, "length": 3})]
+    table_id = 1
+    r = [({'jsonrpc': '2.0', 'id': 1, 'method': 'create_table', 'params': ['Timestamp', 'Process Name', 'RSS']}, {'jsonrpc': '2.0', 'id': 1, 'table_id': table_id}),
+         ({'jsonrpc': '2.0', 'id': 2, 'method': 'append_row', 'table_id': table_id, 'params': ["123456789", "Chrome", "54321"]}, {"jsonrpc": "2.0", "id": 2, "table_id": 1, "length": 1}),
+         ({'jsonrpc': '2.0', 'id': 3, 'method': 'append_row', 'table_id': table_id, 'params': ["123490000", "Chrome", "54321"]}, {"jsonrpc": "2.0", "id": 3, "table_id": 1, "length": 2}),
+         ({'jsonrpc': '2.0', 'id': 3, 'method': 'append_row', 'table_id': table_id, 'params': ["123500000", "Chrome", "54321"]}, {"jsonrpc": "2.0", "id": 4, "table_id": 1, "length": 3})]
+    for item in r:
+        yield(item)
+
+    table_id += 1
+    r = [({'jsonrpc': '2.0', 'id': 1, 'method': 'create_table', 'params': ['Name', 'Mobile', 'Location']}, {'jsonrpc': '2.0', 'id': 1, 'table_id': table_id}),
+         ({'jsonrpc': '2.0', 'id': 2, 'method': 'append_row', 'table_id': table_id, 'params': ["James", "010-1212-3434", "Chicago"]}, {"jsonrpc": "2.0", "id": 2, "table_id": 2, "length": 1}),
+         ({'jsonrpc': '2.0', 'id': 3, 'method': 'append_row', 'table_id': table_id, 'params': ["Tony", "010-2222-8737", "Seoul"]}, {"jsonrpc": "2.0", "id": 3, "table_id": 2, "length": 2}),
+         ({'jsonrpc': '2.0', 'id': 3, 'method': 'append_row', 'table_id': table_id, 'params': ["Jack", "010-9999-1111", "Boston"]}, {"jsonrpc": "2.0", "id": 4, "table_id": 2, "length": 3})]
     for item in r:
         yield(item)
 

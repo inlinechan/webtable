@@ -2,7 +2,9 @@
 #+TODO: TODO INPROGRESS | DONE CANCELED
 
 * Todo
-** INPROGRESS Create multiple table 
-
+** DONE Create multiple tables
+   CLOSED: [2015-02-14 Sat 16:37]
+   - CLOSING NOTE [2015-02-14 Sat 16:37] \\
+     Implemented multiple tables
 * Done
 ** DONE Create single table
