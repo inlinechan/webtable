@@ -6,8 +6,10 @@ import websockets
 
 @asyncio.coroutine
 def producer():
-    r = [({'jsonrpc': '2.0', 'id': 1, 'method': 'create_table', 'params': ['timestamp', 'process_name', 'RSS']}, {'jsonrpc': '2.0', 'id': 1, 'table_id': 1}),
-         ({'jsonrpc': '2.0', 'id': 2, 'method': 'append_row', 'table_id': 1, 'params': ["123456789", "Chrome", "54321"]}, {"jsonrpc": "2.0", "id": 2, "table_id": 1, "length": 1})]
+    r = [({'jsonrpc': '2.0', 'id': 1, 'method': 'create_table', 'params': ['Timestamp', 'Process Name', 'RSS']}, {'jsonrpc': '2.0', 'id': 1, 'table_id': 1}),
+         ({'jsonrpc': '2.0', 'id': 2, 'method': 'append_row', 'table_id': 1, 'params': ["123456789", "Chrome", "54321"]}, {"jsonrpc": "2.0", "id": 2, "table_id": 1, "length": 1}),
+         ({'jsonrpc': '2.0', 'id': 3, 'method': 'append_row', 'table_id': 1, 'params': ["123490000", "Chrome", "54321"]}, {"jsonrpc": "2.0", "id": 3, "table_id": 1, "length": 2}),
+         ({'jsonrpc': '2.0', 'id': 3, 'method': 'append_row', 'table_id': 1, 'params': ["123500000", "Chrome", "54321"]}, {"jsonrpc": "2.0", "id": 3, "table_id": 1, "length": 3})]
     for item in r:
         yield(item)
 

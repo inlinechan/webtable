@@ -18,6 +18,9 @@ jQuery.extend({
                 listeners[i].appendItem(item);
             });
         };
+        this.length = function() {
+            return data.length;
+        };
     },
     ModelListener: function(list) {
         if (!list) list = {};

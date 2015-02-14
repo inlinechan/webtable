@@ -62,10 +62,10 @@
                  "jsonrpc": "2.0",
                  "id": r['id'],
                  "table_id": r['table_id'],
-                 "length": 1
+                 "length": model.length()
              };
              var msg = JSON.stringify(response);
-             console.log("handle_create_table: " + msg);
+             console.log("handle_append_row: " + msg);
              send(msg);
              return true;
          }
