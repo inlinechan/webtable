@@ -6,5 +6,7 @@
    CLOSED: [2015-02-14 Sat 16:37]
    - CLOSING NOTE [2015-02-14 Sat 16:37] \\
      Implemented multiple tables
+** TODO Bind highcharts(dynamic) with table
+
 * Done
 ** DONE Create single table
