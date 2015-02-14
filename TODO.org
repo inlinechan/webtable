@@ -1,0 +1,8 @@
+#+STARTUP: lognotedone
+#+TODO: TODO INPROGRESS | DONE CANCELED
+
+* Todo
+** INPROGRESS Create multiple table 
+
+* Done
+** DONE Create single table
