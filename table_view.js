@@ -5,6 +5,11 @@ jQuery.extend({
         var id = table_id;
 
         var table = $("<table><thead><tr><th>Name</th><th>Address</th></tr></thead><tbody></tbody></table>").attr('id', 'table' + id).addClass('tableview');
+        table.dblclick(function() {
+            console.log("table(" + table.attr('id') + ") dbl clicked");
+            that.notifyDblClick();
+        });
+
         $parent.append(table);
 
         makeDraggable(table);
@@ -35,5 +40,21 @@ jQuery.extend({
             tr.append(tds);
             table.append(tr);
         };
+
+        this.addListener = function(list) {
+            listeners.push(list);
+        };
+
+        this.notifyDblClick = function() {
+            $.each(listeners, function(i) {
+                listeners[i].dblclick();
+            });
+        };
+    },
+    TableViewListener: function(list) {
+        if (!list) list = {};
+        return $.extend({
+            dblclick: function() {}
+        }, list);
     }
 });

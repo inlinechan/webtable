@@ -4,6 +4,11 @@ jQuery.extend({
         var listeners = new Array();
         var data = new Array();
 
+        // Return cloned data
+        this.data = function() {
+            return data.slice();
+        };
+
         this.append = function(arr) {
             data.push(arr);
             that.notifyItemAppended(arr);

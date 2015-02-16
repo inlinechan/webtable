@@ -18,5 +18,9 @@ jQuery.extend({
         this.append = function(row) {
             model.append(row);
         };
+
+        this.addView = function(view) {
+            controller.addView(view);
+        };
     }
 });
