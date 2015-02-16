@@ -1,5 +1,5 @@
 jQuery.extend({
-    Model: function() {
+    Model: function(name) {
         var that = this;
         var listeners = new Array();
         var data = new Array();
@@ -7,6 +7,10 @@ jQuery.extend({
         // Return cloned data
         this.data = function() {
             return data.slice();
+        };
+
+        this.name = function() {
+            return name;
         };
 
         this.append = function(arr) {

@@ -28,7 +28,8 @@ import time
 @asyncio.coroutine
 def highchart_producer():
     table_id = 1
-    yield ({'jsonrpc': '2.0', 'id': 1, 'method': 'create_table', 'params': ['Iteration', 'Temperature']}, {'jsonrpc': '2.0', 'id': 1, 'table_id': table_id})
+    name = 'Temperature'
+    yield ({'jsonrpc': '2.0', 'id': 1, 'method': 'create_table', 'name': name, 'params': ['Iteration', 'Temperature']}, {'jsonrpc': '2.0', 'id': 1, 'table_id': table_id})
     r = ({'jsonrpc': '2.0', 'id': 1, 'method': 'append_row', 'table_id': table_id, 'params': ['1', 24]}, {"jsonrpc": "2.0", "id": 1, "table_id": table_id, "length": 1})
     for ID in range(2, 100):
         req, res = r

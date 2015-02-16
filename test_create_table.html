@@ -39,7 +39,7 @@
                  return false;
 
              var table_id = table_next_id++;
-             var table = new $.Table(table_id);
+             var table = new $.Table(table_id, r['name']);
              table.setHeader(r['params'])
              tables[table_id] = table;
              console.log("table created: " + table_id);

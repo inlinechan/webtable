@@ -1,9 +1,9 @@
 jQuery.extend({
-    Table: function(table_id) {
+    Table: function(table_id, name) {
         var that = this;
         var id = table_id;
 
-        var model = new $.Model();
+        var model = new $.Model(name);
         var view = new $.TableView($("#parent"), id);
         var controller = new $.TableController(model, view);
 

@@ -14,7 +14,7 @@ jQuery.extend({
         var vlist = $.TableViewListener({
             dblclick: function() {
                 var data = model.data();
-                that.addView(new $.HighchartView('#container', data, {'title': 'Temperature'}));
+                that.addView(new $.HighchartView('#container', data, {'title': model.name()}));
                 $('#container').css('position', 'absolute').css('right', '50px');
             }
         });
