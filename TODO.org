@@ -6,7 +6,10 @@
    CLOSED: [2015-02-16 Mon 17:24]
    - CLOSING NOTE [2015-02-16 Mon 17:24] \\
      Implemented
-** INPROGRESS Support multiple set of table and highchart
+** DONE Support multiple set of table and highchart
+   CLOSED: [2015-02-18 Wed 16:57]
+   - CLOSING NOTE [2015-02-18 Wed 16:57] \\
+     Now support multiple set of table and hightchart
 ** TODO Implement 'overflow table'
 
 * Done

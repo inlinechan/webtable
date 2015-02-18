@@ -14,8 +14,10 @@ jQuery.extend({
         var vlist = $.TableViewListener({
             dblclick: function() {
                 var data = model.data();
-                that.addView(new $.HighchartView('#container', data, {'title': model.name()}));
-                $('#container').css('position', 'absolute').css('right', '50px');
+                var plotId = 'plot' + view.id();
+                var plot = $("<div></div>").attr('id', plotId).addClass('plot');
+                $('#plot_container').append(plot);
+                that.addView(new $.HighchartView('#' + plotId, data, {'title': model.name()}));
             }
         });
         view.addListener(vlist);

@@ -31,10 +31,14 @@ def highchart_producer():
     name = 'Temperature'
     yield ({'jsonrpc': '2.0', 'id': 1, 'method': 'create_table', 'name': name, 'params': ['Iteration', 'Temperature']}, {'jsonrpc': '2.0', 'id': 1, 'table_id': table_id})
     r = ({'jsonrpc': '2.0', 'id': 1, 'method': 'append_row', 'table_id': table_id, 'params': ['1', 24]}, {"jsonrpc": "2.0", "id": 1, "table_id": table_id, "length": 1})
+    table_id = 2
+    yield ({'jsonrpc': '2.0', 'id': 1, 'method': 'create_table', 'name': name, 'params': ['Iteration', 'Temperature']}, {'jsonrpc': '2.0', 'id': 1, 'table_id': table_id})
+    r = ({'jsonrpc': '2.0', 'id': 1, 'method': 'append_row', 'table_id': table_id, 'params': ['1', 24]}, {"jsonrpc": "2.0", "id": 1, "table_id": table_id, "length": 1})
     for ID in range(2, 100):
         req, res = r
         req['params'] = [str(ID), random.randint(-10, 40)]
         req['id'] = ID
+        req['table_id'] = random.randint(1, 2)
         time.sleep(1)
         yield(r)
 

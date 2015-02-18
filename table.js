@@ -1,10 +1,10 @@
 jQuery.extend({
-    Table: function(table_id, name) {
+    Table: function(table_id, name, container) {
         var that = this;
         var id = table_id;
 
         var model = new $.Model(name);
-        var view = new $.TableView($("#parent"), id);
+        var view = new $.TableView($(container || '#table_container'), id);
         var controller = new $.TableController(model, view);
 
         this.setHeader = function(header) {

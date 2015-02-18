@@ -15,11 +15,14 @@ jQuery.extend({
         makeDraggable(table);
 
         function makeDraggable(obj) {
-            obj.css('position', 'absolute');
             var dom_element = obj[0];
 
             dragObject(dom_element, dom_element);
         }
+
+        this.id = function() {
+            return id;
+        };
 
         this.setHeader = function(header) {
             var thead = $('#table'+id+' thead');
