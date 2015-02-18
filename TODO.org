@@ -11,6 +11,7 @@
    - CLOSING NOTE [2015-02-18 Wed 16:57] \\
      Now support multiple set of table and hightchart
 ** TODO Implement 'overflow table'
+** INPROGRESS View should have titlebar having drag handle
 
 * Done
 ** DONE Create single table
