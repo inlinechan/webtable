@@ -1,18 +1,20 @@
 jQuery.extend({
-    TableView: function($parent, table_id) {
+    TableView: function($parent, table_id, name) {
         var that = this;
         var listeners = new Array();
         var id = table_id;
 
+        var container = $("<div></div>").addClass('widget');
         var table = $("<table><thead><tr><th>Name</th><th>Address</th></tr></thead><tbody></tbody></table>").attr('id', 'table' + id).addClass('tableview');
         table.dblclick(function() {
             console.log("table(" + table.attr('id') + ") dbl clicked");
             that.notifyDblClick();
         });
+        container.append($("<div class=\"title\">" + name + "<div style=\"float: right\"> ID: " + id + "</div></div>"));
+        container.append(table);
+        $parent.append(container);
 
-        $parent.append(table);
-
-        makeDraggable(table);
+        makeDraggable(container);
 
         function makeDraggable(obj) {
             var dom_element = obj[0];
