@@ -10,16 +10,15 @@ jQuery.extend({
             console.log("table(" + table.attr('id') + ") dbl clicked");
             that.notifyDblClick();
         });
-        container.append($("<div class=\"title\">" + name + "<div style=\"float: right\"> ID: " + id + "</div></div>"));
+        var title = $("<div class=\"title\">" + name + "<div style=\"float: right\"> ID: " + id + "</div></div>");
+        container.append(title);
         container.append(table);
         $parent.append(container);
 
-        makeDraggable(container);
+        makeDraggable(container, title);
 
-        function makeDraggable(obj) {
-            var dom_element = obj[0];
-
-            dragObject(dom_element, dom_element);
+        function makeDraggable(element, handle) {
+            dragObject(element[0], handle[0]);
         }
 
         this.id = function() {

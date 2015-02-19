@@ -23,12 +23,10 @@ jQuery.extend({
                 $('#plot_container').append(container);
                 that.addView(new $.HighchartView('#' + plotId, data, {'title': model.name()}));
 
-                function makeDraggable(obj) {
-                    var dom_element = obj[0];
-
-                    dragObject(dom_element, dom_element);
+                function makeDraggable(element, handle) {
+                    dragObject(element[0], handle[0]);
                 }
-                makeDraggable(container);
+                makeDraggable(container, title);
             }
         });
         view.addListener(vlist);
