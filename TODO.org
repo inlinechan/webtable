@@ -11,8 +11,10 @@
    - CLOSING NOTE [2015-02-18 Wed 16:57] \\
      Now support multiple set of table and hightchart
 ** TODO Implement 'overflow table'
-** INPROGRESS View should have titlebar having drag handle
-
+** DONE View should have titlebar having drag handle
+   CLOSED: [2015-02-19 Thu 16:02]
+   - CLOSING NOTE [2015-02-19 Thu 16:02] \\
+     Implemented add title and title as drag handle
 * Done
 ** DONE Create single table
 ** DONE Create multiple tables
