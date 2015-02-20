@@ -1,10 +1,10 @@
 jQuery.extend({
-    TableView: function($parent, table_id, name) {
+    TableView: function($parent, table_id) {
         var that = this;
         var listeners = new Array();
         var id = table_id;
 
-        var table = $("<table><thead><tr><th>Name</th><th>Address</th></tr></thead><tbody></tbody></table>").attr('id', 'table' + id).addClass('tableview');
+        var table = $("<table><thead></thead><tbody></tbody></table>").attr('id', 'table' + id).addClass('tableview');
         table.dblclick(function() {
             console.log("table(" + table.attr('id') + ") dbl clicked");
             that.notifyDblClick();
