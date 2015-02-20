@@ -4,7 +4,8 @@ jQuery.extend({
         var id = table_id;
 
         var model = new $.Model(name);
-        var view = new $.TableView($(container || '#table_container'), id, name);
+        var view = new $.TableView(null, id, name);
+        var frame = new $.FrameView($(container || '#table_container'), id, name, view.view());
         var controller = new $.TableController(model, view);
 
         this.setHeader = function(header) {

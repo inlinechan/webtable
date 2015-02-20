@@ -4,25 +4,18 @@ jQuery.extend({
         var listeners = new Array();
         var id = table_id;
 
-        var container = $("<div></div>").addClass('widget');
         var table = $("<table><thead><tr><th>Name</th><th>Address</th></tr></thead><tbody></tbody></table>").attr('id', 'table' + id).addClass('tableview');
         table.dblclick(function() {
             console.log("table(" + table.attr('id') + ") dbl clicked");
             that.notifyDblClick();
         });
-        var title = $("<div class=\"title\">" + name + "<div style=\"float: right\"> ID: " + id + "</div></div>");
-        container.append(title);
-        container.append(table);
-        $parent.append(container);
-
-        makeDraggable(container, title);
-
-        function makeDraggable(element, handle) {
-            dragObject(element[0], handle[0]);
-        }
 
         this.id = function() {
             return id;
+        };
+
+        this.view = function() {
+            return table;
         };
 
         this.setHeader = function(header) {
