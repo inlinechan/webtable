@@ -6,7 +6,8 @@ jQuery.extend({
 
         // initialize
         var container = $("<div></div>").addClass('FrameView');
-        var $title = $("<div class=\"title\">" + title + "<div style=\"float: right\"> ID: " + id + "</div></div>");
+        var $title = $("<div>" + title + "</div>").addClass('title');
+        $title.append($("<div>ID: " + id + "</div>").addClass('title_id'));
         var $default_content = $("<div></div>");
         container.append($title);
         container.append($content || $default_content);

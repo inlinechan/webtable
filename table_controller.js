@@ -15,18 +15,10 @@ jQuery.extend({
             dblclick: function() {
                 var data = model.data();
                 var plotId = 'plot' + view.id();
-                var container = $("<div></div>").addClass('widget');
+                var title = model.name();
                 var plot = $("<div></div>").attr('id', plotId).addClass('plot');
-                var title = $("<div>" + model.name() + "<div style=\"float: right\"> ID: " + plotId + "</div>" + "</div>").addClass('title');
-                container.append(title);
-                container.append(plot);
-                $('#plot_container').append(container);
+                var container = new $.FrameView($('#plot_container'), plotId, title, plot);
                 that.addView(new $.HighchartView('#' + plotId, data, {'title': model.name()}));
-
-                function makeDraggable(element, handle) {
-                    dragObject(element[0], handle[0]);
-                }
-                makeDraggable(container, title);
             }
         });
         view.addListener(vlist);
