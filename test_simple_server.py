@@ -8,9 +8,9 @@ import time
 import websockets
 
 PORT   = 7778
-SLEEP  = 0
+SLEEP  = 1
 TITLE  = 'MemInfo'
-USE_NO = True
+USE_NO = False
 
 @asyncio.coroutine
 def stdin_producer():

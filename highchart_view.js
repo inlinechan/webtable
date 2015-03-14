@@ -4,6 +4,15 @@ jQuery.extend({
         var series = null;
         var _data = data;
 
+        var nbr_of_series = data && data[0].length || 0;
+        var series_data = new Array(nbr_of_series);
+        for (var i = 0 ; i < nbr_of_series; ++i) {
+            var s = series_data[i] = []
+            data.forEach(function(e, _i, ar) { s.push(e[i]); });
+        }
+        var initial_series = [];
+        series_data.forEach(function(e, i, ar) { initial_series.push({'data': e}); });
+
         var plot = $(parent).highcharts({
             chart: {
                 type: 'spline',
@@ -28,15 +37,13 @@ jQuery.extend({
                     text: 'Iteration'
                 }
             },
-            series: [{
-                data: data
-            }]
+            series: initial_series
         });
 
         var count = 3;
         this.appendRow = function(items) {
-            console.log('items: ' + items);
-            series[0].addPoint(items, true, false);
+            /* console.log('items: ' + items); */
+            items.forEach(function(e, i, ar) { series[i].addPoint(e, true, false); });
             count++;
         };
     }
