@@ -3,6 +3,7 @@ jQuery.extend({
         var that = this;
         var listeners = new Array();
         var data = new Array();
+        var _header;
 
         // Return cloned data
         this.data = function() {
@@ -29,6 +30,12 @@ jQuery.extend({
         };
         this.length = function() {
             return data.length;
+        };
+        this.setHeader = function(header) {
+            that._header = header;
+        };
+        this.header = function() {
+            return that._header;
         };
     },
     ModelListener: function(list) {

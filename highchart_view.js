@@ -7,11 +7,14 @@ jQuery.extend({
         var nbr_of_series = data && data[0].length || 0;
         var series_data = new Array(nbr_of_series);
         for (var i = 0 ; i < nbr_of_series; ++i) {
-            var s = series_data[i] = []
+            var s = series_data[i] = [];
             data.forEach(function(e, _i, ar) { s.push(e[i]); });
         }
         var initial_series = [];
-        series_data.forEach(function(e, i, ar) { initial_series.push({'data': e}); });
+        series_data.forEach(function(e, i, ar) { initial_series.push({
+            'data': e,
+            'name': options.header[i] || 'series' + i
+        }); });
 
         var plot = $(parent).highcharts({
             chart: {

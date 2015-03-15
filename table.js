@@ -9,6 +9,7 @@ jQuery.extend({
         var controller = new $.TableController(model, view);
 
         this.setHeader = function(header) {
+            model.setHeader(header);
             view.setHeader(header);
         };
 
