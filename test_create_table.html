@@ -19,9 +19,13 @@
          text-align: right;
      }
      #table_container {
+         position: relative;
+         top: 20px;
          float: left;
      }
      #plot_container {
+         position: relative;
+         top: 20px;
          float: right;
      }
      #plot_container .plot {
@@ -41,6 +45,28 @@
      .FrameView .title_id {
          float: right;
      }
+
+     #toolbar_container {
+         position: absolute;
+         top: 0px;
+         right: 0px;
+         width: 100%;
+         background-color: #eee;
+         border-bottom: 1px solid #aaa;
+     }
+     #login {
+         float: right;
+     }
+     .connect {
+         width: 20px;
+         height: 20px;
+         background: transparent url('images/connect.png') no-repeat center;
+     }
+     .disconnect {
+         width: 20px;
+         height: 20px;
+         background: transparent url('images/disconnect.png') no-repeat center;
+     }
     </style>
     <script src="jquery.2.1.3.min.js"></script>
     <script src="drag.js"></script>
@@ -54,11 +80,21 @@
     <script src="highcharts.js"></script>
     <script>
      document.addEventListener("DOMContentLoaded", function(event) {
-         init();
+         var uri = $('#uri').prop('value');
+         $('#connect').click(function() {
+             init(uri);
+         });
+         init(uri);
      });
-     function init() {
-         var uri = "ws://localhost:7778";
-         var socket = new WebSocket(uri);
+     function init(uri) {
+         var default_uri = "ws://localhost:7778";
+         try {
+             var socket = new WebSocket(uri || default_uri);
+         } catch (e) {
+             console.log('failed to connect ' + uri);
+             return;
+         }
+
          var table_next_id = 1;
          var tables = {};
 
@@ -68,6 +104,14 @@
              
          socket.onopen = function(event) {
              console.log("onopen: ");
+             $('#connect').prop('disabled', true);
+             $('#uri').prop('disabled', true);
+         };
+
+         socket.onclose = function(event) {
+             console.log("onclose: ");
+             $('#connect').prop('disabled', false);
+             $('#uri').prop('disabled', false);
          };
 
          function handle_create_table(request) {
@@ -127,6 +171,12 @@
     </script>
 </head>
 <body>
+    <div id="toolbar_container">
+        <div id="login">
+            URL: <input id="uri" value="ws://localhost:7778"/>
+            <button id="connect" name="connect" class="connect"></button>
+        </div>
+    </div>
     <div id="table_container"></div>
     <div id="plot_container"></div>
 </body>
