@@ -8,13 +8,15 @@ jQuery.extend({
         var series_data = new Array(nbr_of_series);
         for (var i = 0 ; i < nbr_of_series; ++i) {
             var s = series_data[i] = [];
-            data.forEach(function(e, _i, ar) { s.push(e[i]); });
+            data.forEach(function(e, _i, ar) { s.push(Number(e[i])); });
         }
         var initial_series = [];
-        series_data.forEach(function(e, i, ar) { initial_series.push({
-            'data': e,
-            'name': options.header[i] || 'series' + i
-        }); });
+        series_data.forEach(function(e, i, ar) {
+            initial_series.push({
+                'data': e,
+                'name': options.header[i] || 'series' + i
+            });
+        });
 
         var plot = $(parent).highcharts({
             chart: {
@@ -46,7 +48,7 @@ jQuery.extend({
         var count = 3;
         this.appendRow = function(items) {
             /* console.log('items: ' + items); */
-            items.forEach(function(e, i, ar) { series[i].addPoint(e, true, false); });
+            items.forEach(function(e, i, ar) { series[i].addPoint(Number(e), true, false); });
             count++;
         };
     }
