@@ -61,13 +61,13 @@ var server = ws.createServer(function (conn) {
             msg = {'jsonrpc': '2.0',
                    'id': id++,
                    'method': 'create_table',
-                   'name': name, 'params': line.split(/\s+/)};
+                   'name': name, 'params': line.trim().split(/\s+/)};
         else
             msg = {'jsonrpc': '2.0',
                    'id': id++,
                    'method': 'append_row',
                    'table_id': table_id,
-                   'params': line.split(/\s+/)};
+                   'params': line.trim().split(/\s+/)};
         if (conn.readyState == conn.OPEN)
             conn.sendText(JSON.stringify(msg));
     });
