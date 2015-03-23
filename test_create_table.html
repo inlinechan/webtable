@@ -83,6 +83,7 @@
     <script>
      document.addEventListener("DOMContentLoaded", function(event) {
          var web_table = new $.WebTable();
+         var collector = new Array();
          var button_listener = $.WebTableListener({
              onopen: function(event, socket) {
                  $('#connect').removeClass('connect').addClass('disconnect');
@@ -91,6 +92,9 @@
              onclose: function(event, socket) {
                  $('#connect').removeClass('disconnect').addClass('connect');
                  $('#uri').prop('disabled', false);
+             },
+             onmessage: function(msg) {
+                 collector.push(msg);
              }
          });
 

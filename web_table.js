@@ -27,6 +27,7 @@ jQuery.extend({
                             return;
                         handled = element(request);
                     });
+                    notifyMessage(event.data);
                 };
 
                 socket.onopen = function(event) {
@@ -62,6 +63,12 @@ jQuery.extend({
         function notifyClose(event) {
             $.each(listeners, function(i) {
                 listeners[i].onclose(event, socket);
+            });
+        };
+
+        function notifyMessage(msg) {
+            $.each(listeners, function(i) {
+                listeners[i].onmessage(msg);
             });
         };
 
@@ -108,8 +115,9 @@ jQuery.extend({
     WebTableListener: function(list) {
         if (!list) list = {};
         return $.extend({
-            onopen : function() {},
-            onclose: function() {}
+            onopen : function(event, socket) {},
+            onclose: function(event, socket) {},
+            onmessage: function(msg) {}
         }, list);
     }
 });
