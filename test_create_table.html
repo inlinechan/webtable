@@ -53,9 +53,7 @@
          width: 100%;
          background-color: #eee;
          border-bottom: 1px solid #aaa;
-     }
-     #login {
-         float: right;
+         text-align: right;
      }
      .connect {
          width: 20px;
@@ -95,6 +93,8 @@
              },
              onmessage: function(msg) {
                  collector.push(msg);
+                 if (collector.length > 0)
+                     $('#save').prop('disabled', false);
              }
          });
 
@@ -109,15 +109,55 @@
              else
                  web_table.disconnect();
          });
+
+         $('#save').click(function() {
+             if (collector.length > 0) {
+                 var data = "";
+                 collector.forEach(function(e, i, ar) {
+                     data += e + '\n';
+                 });
+             }
+             var MIME_TYPE = 'application/json';
+             var bb = new Blob([data], {type: MIME_TYPE});
+             var a = document.createElement('a');
+             var date = new Date();
+             a.id = 'download';
+             a.download = 'webtable_' + date.getTime();
+             a.href = window.URL.createObjectURL(bb);
+             a.textContent = 'Download ready';
+             a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(':');
+             a.style.display = 'none';
+             $('#session').append(a);
+
+             var cleanUp = function(a) {
+                 a.textContent = 'Downloaded';
+
+                 // Need a small delay for the revokeObjectURL to work properly.
+                 setTimeout(function() {
+                     window.URL.revokeObjectURL(a.href);
+                     $('#session a').remove();
+                 }, 500);
+             };
+
+             a.onclick = function(e) {
+                 cleanUp(this);
+             };
+             a.click();
+         });
      });
     </script>
 </head>
 <body>
     <div id="toolbar_container">
-        <div id="login">
+        <span id="session">
+            <button id="load" name="load" class="load">Load</button>
+            <button id="save" name="save" class="save" disabled>Save</button>
+        </span>
+        |
+        <span id="login">
             URL: <input id="uri" value="ws://localhost:7778"/>
             <button id="connect" name="connect" class="connect"></button>
-        </div>
+        </span>
     </div>
     <div id="table_container"></div>
     <div id="plot_container"></div>
