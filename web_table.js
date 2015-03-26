@@ -8,26 +8,31 @@ jQuery.extend({
         var tables = {};
 
         function send(msg) {
-            if (socket.readyState == socket.OPEN)
+            if (socket && socket.readyState == socket.OPEN)
                 socket.send(msg);
         };
+
+        function onmessage(msg) {
+            request = JSON.parse(msg);
+            var handlers = new Array();
+            handlers.push(handle_create_table,
+                          handle_append_row);
+            var handled = false;
+            handlers.forEach(function(element, index, list) {
+                if (handled)
+                    return;
+                handled = element(request);
+            });
+            notifyMessage(msg);
+        };
+
+        this.append = onmessage;
 
         this.connect = function(uri) {
             try {
                 socket = new WebSocket(uri || default_uri);
                 socket.onmessage = function(event) {
-                    console.log("onmessage: " + event.data);
-                    request = JSON.parse(event.data);
-                    var handlers = new Array();
-                    handlers.push(handle_create_table,
-                                  handle_append_row);
-                    var handled = false;
-                    handlers.forEach(function(element, index, list) {
-                        if (handled)
-                            return;
-                        handled = element(request);
-                    });
-                    notifyMessage(event.data);
+                    onmessage(event.data);
                 };
 
                 socket.onopen = function(event) {

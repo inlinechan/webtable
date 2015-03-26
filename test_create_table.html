@@ -114,7 +114,7 @@
              if (collector.length > 0) {
                  var data = "";
                  collector.forEach(function(e, i, ar) {
-                     data += e + '\n';
+                     data += e + ',\n';
                  });
              }
              var MIME_TYPE = 'application/json';
@@ -150,7 +150,7 @@
 <body>
     <div id="toolbar_container">
         <span id="session">
-            <button id="load" name="load" class="load">Load</button>
+            <input type="file" id="load" name="files" class="load" />
             <button id="save" name="save" class="save" disabled>Save</button>
         </span>
         |
@@ -161,5 +161,25 @@
     </div>
     <div id="table_container"></div>
     <div id="plot_container"></div>
+    <script>
+     function handleLoad(evt) {
+         $('.FrameView').remove();
+         var file = evt.target.files[0];
+
+         var reader = new FileReader();
+         reader.onload = (function(theFile) {
+             return function(e) {
+                 var web_table = new $.WebTable();
+                 var lines = e.target.result.split(',\n');
+                 lines.forEach(function(elem, i, ar) {
+                     if (elem.length > 0)
+                         web_table.append(elem);
+                 });
+             };
+         })(file);
+         reader.readAsText(file);
+     };
+     document.getElementById('load').addEventListener('change', handleLoad, false);
+    </script>
 </body>
 </html>
