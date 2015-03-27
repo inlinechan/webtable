@@ -42,6 +42,11 @@ jQuery.extend({
                     text: 'Iteration'
                 }
             },
+            plotOptions: {
+                series: {
+                    pointStart: 1
+                }
+            },
             series: initial_series
         });
 
