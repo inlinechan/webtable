@@ -18,10 +18,18 @@ jQuery.extend({
                 var title = model.name();
                 var plot = $("<div></div>").attr('id', plotId).addClass('plot');
                 var container = new $.FrameView($('#plot_container'), plotId, title, plot);
-                that.addView(new $.HighchartView('#' + plotId, data, {
+                var highchartView = new $.HighchartView('#' + plotId, data, {
                     'title': model.name(),
                     'header': model.header()
-                }));
+                });
+                that.addView(highchartView);
+                var frameViewListener = $.FrameViewListener({
+                    resize: function(w, h) {
+                        highchartView.resize(w, h);
+                    }
+                });
+                container.addListener(frameViewListener);
+
             }
         });
         view.addListener(vlist);

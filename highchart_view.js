@@ -56,5 +56,10 @@ jQuery.extend({
             items.forEach(function(e, i, ar) { series[i].addPoint(Number(e), true, false); });
             count++;
         };
+
+        this.resize = function(w, h) {
+            console.log('width: ' + w + ', height: ' + h);
+            plot[0].setSize(w, h);
+        };
     }
 });
