@@ -1,75 +1,10 @@
 <html>
 <head>
     <title>WebTable v0.1</title>
-    <style type="text/css">
-     .tableView {
-         min-width: 300px;
-         width: 100%;
-         padding: 0px;
-         margin: 0px;
-         border-collapse: collapse;
-     }
-     .tableView THEAD { background-color: #ccc; }
-     .tableView TBODY { background-color: #eee; }
-     .tableView TD, .tableView TH {
-         border: 1px solid #555;
-         padding: 5px;
-     }
-     .tableView TD {
-         text-align: right;
-     }
-     #table_container {
-         position: relative;
-         top: 20px;
-         float: left;
-     }
-     #plot_container {
-         position: relative;
-         top: 20px;
-         float: right;
-     }
-     .FrameView {
-         border: 1px solid black;
-         position: relative;
-     }
-
-     .FrameView .inner{
-         min-width: 400px;
-         min-height: 300px;
-     }
-
-     .FrameView .title {
-         padding-left: 10px;
-         background-color: #aaa;
-     }
-
-     .FrameView .title_id {
-         float: right;
-     }
-
-     #toolbar_container {
-         position: absolute;
-         top: 0px;
-         right: 0px;
-         width: 100%;
-         background-color: #eee;
-         border-bottom: 1px solid #aaa;
-         text-align: right;
-     }
-     .connect {
-         width: 20px;
-         height: 20px;
-         background: transparent url('images/connect.png') no-repeat center;
-     }
-     .disconnect {
-         width: 20px;
-         height: 20px;
-         background: transparent url('images/disconnect.png') no-repeat center;
-     }
-    </style>
+    <link rel="stylesheet" type="text/css" href="webtable.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <!-- <script src="jquery.2.1.3.min.js"></script> -->
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="drag.js"></script>
     <script src="model.js"></script>
