@@ -7,7 +7,6 @@ jQuery.extend({
 
         var table = $("<table><thead></thead><tbody></tbody></table>").attr('id', 'table' + id).addClass('tableview');
         table.dblclick(function() {
-            console.log("table(" + table.attr('id') + ") dbl clicked");
             that.notifyDblClick();
         });
 

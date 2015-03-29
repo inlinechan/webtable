@@ -5,7 +5,6 @@ jQuery.extend({
         var mlist = $.ModelListener({
             appendItem: function(item) {
                 view.appendRow(item);
-                console.log('appendItem: ' + item);
             }
         });
 

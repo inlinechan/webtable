@@ -86,14 +86,12 @@ jQuery.extend({
             var table = new $.Table(table_id, r['name']);
             table.setHeader(r['params']);
             tables[table_id] = table;
-            console.log("table created: " + table_id);
             var response = {
                 "jsonrpc": "2.0",
                 "id": r['id'],
                 "table_id": table_id
             };
             var msg = JSON.stringify(response);
-            console.log("handle_create_table: " + msg);
             send(msg);
             return true;
         }
@@ -112,7 +110,6 @@ jQuery.extend({
                 "length": table.length()
             };
             var msg = JSON.stringify(response);
-            console.log("handle_append_row: " + msg);
             send(msg);
             return true;
         }
