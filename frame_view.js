@@ -17,8 +17,8 @@ jQuery.extend({
         $parent.append(container);
 
         inner_container.resize(function() {
-            var width = inner_container.css('width');
-            var height = inner_container.css('height');
+            var width = inner_container.width();
+            var height = inner_container.height();
             that.notifyResize(width, height);
         });
 

@@ -16,7 +16,7 @@ jQuery.extend({
                 var data = model.data();
                 var plotId = 'plot' + view.id();
                 var title = model.name();
-                var plot = $("<div></div>").attr('id', plotId).addClass('plot');
+                var plot = $("<div></div>").attr('id', plotId); //.addClass('plot');
                 var container = new $.FrameView($('#plot_container'), plotId, title, plot);
                 var highchartView = new $.HighchartView('#' + plotId, data, {
                     'title': model.name(),

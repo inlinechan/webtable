@@ -58,8 +58,8 @@ jQuery.extend({
         };
 
         this.resize = function(w, h) {
-            console.log('width: ' + w + ', height: ' + h);
-            plot[0].setSize(w, h);
+            $(parent).width(w).height(h - 20);
+            $(parent).highcharts().reflow();
         };
     }
 });
