@@ -61,7 +61,8 @@
              var a = document.createElement('a');
              var date = new Date();
              a.id = 'download';
-             a.download = 'webtable_' + date.getTime();
+             var date_detail = date.toString().split(/[ \t]/).splice(0, 5).join('_').replace(/[ \t:]+/g, '_');
+             a.download = 'webtable_' +  date_detail + '.txt';
              a.href = window.URL.createObjectURL(bb);
              a.textContent = 'Download ready';
              a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(':');
