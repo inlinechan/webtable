@@ -13,16 +13,11 @@ jQuery.extend({
         };
 
         function onmessage(msg) {
-            request = JSON.parse(msg);
-            var handlers = new Array();
-            handlers.push(handle_create_table,
-                          handle_append_row);
-            var handled = false;
-            handlers.forEach(function(element, index, list) {
-                if (handled)
-                    return;
-                handled = element(request);
-            });
+            var request = JSON.parse(msg);
+            var method = request['method'];
+            var handlers = {'create_table' : handle_create_table,
+                            'append_row' : handle_append_row};
+            handlers[method](request);
             notifyMessage(msg);
         };
 
