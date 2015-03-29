@@ -1,0 +1,37 @@
+#+Options: ^:nil
+
+* Introduction
+webtable is to show some data in plot from as well as in tabular form.
+Data source can be stdin or multiple files or from program as long as
+it sends JSON RPC 2.0 commands through websocket.
+
+* Prerequisites
+** For server(test_nodejs_server.js)
+   1. nodejs
+   2. tail, nodejs-websocket, line-reader, readline
+
+** For client
+   1. Place this project into web server root
+   2. Or run simply webserver by
+      #+BEGIN_EXAMPLE
+      $ python -m SimpleHTTPServer
+      #+END_EXAMPLE
+
+* How to run
+  1. Run simple webserver
+     #+BEGIN_EXAMPLE
+     $ python -m SimpleHTTPServer
+     Serving HTTP on 0.0.0.0 port 8000
+     #+END_EXAMPLE
+  2. (Server) Run nodejs test server to send
+     #+BEGIN_EXAMPLE
+     $ npm tail nodejs-websocket line-reader readline
+     $ ./meminfo.sh | nodejs test_nodejs_server.js
+     #+END_EXAMPLE
+  3. (Client) Go to http://localhost:8000/webtable.html in your web
+     browser. Recommends Chrome or Firefox.
+  4. You'll some rows in the table.
+  5. You'll see Highchart by double clicking table column.
+
+* How it works
+  TODO
