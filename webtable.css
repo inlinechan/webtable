@@ -44,13 +44,14 @@
 }
 
 #toolbar_container {
-    position: absolute;
+    position: fixed;
     top: 0px;
     right: 0px;
     width: 100%;
     background-color: #eee;
     border-bottom: 1px solid #aaa;
     text-align: right;
+    z-index: 100;
 }
 .connect {
     width: 20px;
