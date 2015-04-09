@@ -52,6 +52,10 @@
     float: right;
 }
 
+.FrameView .icons {
+    float: right;
+}
+
 #toolbar_container {
     position: fixed;
     top: 0px;
@@ -71,4 +75,9 @@
     width: 20px;
     height: 20px;
     background: transparent url('images/disconnect.png') no-repeat center;
+}
+.close {
+    width: 20px;
+    height: 20px;
+    /* background: transparent url('images/connect.png') no-repeat center; */
 }
