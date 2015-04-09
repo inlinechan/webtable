@@ -14,6 +14,12 @@ jQuery.extend({
             dblclick: function() {
                 var data = model.data();
                 var plotId = 'plot' + view.id();
+
+                if ($('#' + plotId).length) {
+                    console.log('#' + plotId + "is already exist");
+                    return;
+                }
+
                 var title = model.name();
                 var plot = $("<div></div>").attr('id', plotId); //.addClass('plot');
                 var container = new $.FrameView($('#plot_container'), plotId, title, plot);
