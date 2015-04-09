@@ -13,12 +13,14 @@ jQuery.extend({
         inner_container.append($title);
         inner_container.append($content || $default_content);
         container.append(inner_container);
-        inner_container.resizable();
+        container.resizable({minWidth: 400, minHeight: 300});
         $parent.append(container);
 
-        inner_container.resize(function() {
-            var width = inner_container.width();
-            var height = inner_container.height();
+        container.resize(function() {
+            var width = container.width();
+            var height = container.height();
+            inner_container.css('height', height);
+            inner_container.css('width', width);
             that.notifyResize(width, height);
         });
 

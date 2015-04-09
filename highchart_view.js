@@ -57,7 +57,7 @@ jQuery.extend({
         };
 
         this.resize = function(w, h) {
-            $(parent).width(w).height(h - 20);
+            $(parent).width(w - 30).height(h - 20);
             $(parent).highcharts().reflow();
         };
     }

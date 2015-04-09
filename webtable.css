@@ -1,5 +1,10 @@
+.min-width {
+    min-width: 400px;
+}
+.min-height {
+    min-height: 300px;
+}
 .tableView {
-    min-width: 300px;
     width: 100%;
     padding: 0px;
     margin: 0px;
@@ -14,29 +19,33 @@
 .tableView TD {
     text-align: right;
 }
+
 #table_container {
     position: relative;
     top: 20px;
     float: left;
+    width: 45%;
+    height: 90%;
 }
 #plot_container {
     position: relative;
     top: 20px;
     float: right;
+    width: 45%;
+    height: 90%;
 }
 .FrameView {
     border: 1px solid black;
     position: relative;
 }
 
-.FrameView .inner{
-    min-width: 400px;
-    min-height: 300px;
-}
-
 .FrameView .title {
     padding-left: 10px;
     background-color: #aaa;
+}
+
+.FrameView .inner {
+    overflow-y: auto;
 }
 
 .FrameView .title_id {
