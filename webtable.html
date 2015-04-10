@@ -17,73 +17,12 @@
     <script src="highcharts.js"></script>
     <script src="exporting.js"></script>
     <script src="web_table.js"></script>
+    <script src="toolbar.js"></script>
     <script>
      $(function() {
          var web_table = new $.WebTable();
-         var collector = new Array();
-         var button_listener = $.WebTableListener({
-             onopen: function(event, socket) {
-                 $('#connect').removeClass('connect').addClass('disconnect');
-                 $('#uri').prop('disabled', true);
-             },
-             onclose: function(event, socket) {
-                 $('#connect').removeClass('disconnect').addClass('connect');
-                 $('#uri').prop('disabled', false);
-             },
-             onmessage: function(msg) {
-                 collector.push(msg);
-                 if (collector.length > 0)
-                     $('#save').prop('disabled', false);
-             }
-         });
-
-         var uri = $('#uri').prop('value');
-
-         web_table.addListener(button_listener);
-         web_table.connect(uri);
-
-         $('#connect').click(function() {
-             if ($('#connect').hasClass('connect'))
-                 web_table.connect($('#uri').prop('value'));
-             else
-                 web_table.disconnect();
-         });
-
-         $('#save').click(function() {
-             if (collector.length > 0) {
-                 var data = "";
-                 collector.forEach(function(e, i, ar) {
-                     data += e + ',\n';
-                 });
-             }
-             var MIME_TYPE = 'application/json';
-             var bb = new Blob([data], {type: MIME_TYPE});
-             var a = document.createElement('a');
-             var date = new Date();
-             a.id = 'download';
-             var date_detail = date.toString().split(/[ \t]/).splice(0, 5).join('_').replace(/[ \t:]+/g, '_');
-             a.download = 'webtable_' +  date_detail + '.txt';
-             a.href = window.URL.createObjectURL(bb);
-             a.textContent = 'Download ready';
-             a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(':');
-             a.style.display = 'none';
-             $('#session').append(a);
-
-             var cleanUp = function(a) {
-                 a.textContent = 'Downloaded';
-
-                 // Need a small delay for the revokeObjectURL to work properly.
-                 setTimeout(function() {
-                     window.URL.revokeObjectURL(a.href);
-                     $('#session a').remove();
-                 }, 500);
-             };
-
-             a.onclick = function(e) {
-                 cleanUp(this);
-             };
-             a.click();
-         });
+         var toolbar = new $.Toolbar(web_table);
+         web_table.connect(toolbar.uri());
      });
     </script>
 </head>
@@ -101,25 +40,5 @@
     </div>
     <div id="table_container"></div>
     <div id="plot_container"></div>
-    <script>
-     function handleLoad(evt) {
-         $('.FrameView').remove();
-         var file = evt.target.files[0];
-
-         var reader = new FileReader();
-         reader.onload = (function(theFile) {
-             return function(e) {
-                 var web_table = new $.WebTable();
-                 var lines = e.target.result.split(',\n');
-                 lines.forEach(function(elem, i, ar) {
-                     if (elem.length > 0)
-                         web_table.append(elem);
-                 });
-             };
-         })(file);
-         reader.readAsText(file);
-     };
-     document.getElementById('load').addEventListener('change', handleLoad, false);
-    </script>
 </body>
 </html>
