@@ -27,25 +27,26 @@ jQuery.extend({
         var size_state = SizeState.initial;
         var sizes = {};
 
-        function _resize(newstate) {
-            var width = sizes[newstate].width;
-            var height = sizes[newstate].height;
+        sizes[SizeState.minimized] = {'width': 400, 'height': 300};
 
-            container.css('width', width);
-            container.css('height', height);
+        function resize_internal(width, height, do_update) {
+            if (do_update) {
+                container.css('width', width);
+                container.css('height', height);
+            }
             inner_container.css('height', height - $title_container.outerHeight());
             inner_container.css('width', width);
             that.notifyResize(width, height);
         }
 
-        sizes[SizeState.minimized] = {'width': 400, 'height': 300};
+        function resize(newstate) {
+            resize_internal(sizes[newstate].width, sizes[newstate].height, true);
+        }
 
         container.resize(function() {
             var width = container.innerWidth();
             var height = container.innerHeight();
-            inner_container.css('height', height - $title_container.outerHeight());
-            inner_container.css('width', width);
-            that.notifyResize(width, height);
+            resize_internal(width, height, false);
 
             sizes[SizeState.resized] = {'width': width, 'height': height};
             size_state = SizeState.resized;
@@ -70,7 +71,7 @@ jQuery.extend({
                 size_state = SizeState.resized;
                 break;
             }
-            _resize(size_state);
+            resize(size_state);
         });
 
         this.close = function() {
