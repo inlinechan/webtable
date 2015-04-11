@@ -13,16 +13,16 @@ jQuery.extend({
         $title.append($icons);
         $title.append($("<div>ID: " + id + "</div>").addClass('title_id'));
         var $default_content = $("<div></div>");
-        inner_container.append($title);
+        container.append($title);
         inner_container.append($content || $default_content);
         container.append(inner_container);
         container.resizable({minWidth: 400, minHeight: 300});
         $parent.append(container);
 
         container.resize(function() {
-            var width = container.width();
-            var height = container.height();
-            inner_container.css('height', height);
+            var width = container.innerWidth();
+            var height = container.innerHeight();
+            inner_container.css('height', height - $title.outerHeight());
             inner_container.css('width', width);
             that.notifyResize(width, height);
         });
