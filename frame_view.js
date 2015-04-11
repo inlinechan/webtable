@@ -21,12 +21,56 @@ jQuery.extend({
         container.resizable({minWidth: 400, minHeight: 300});
         $parent.append(container);
 
+        ////////////////////////////////////////////////////////////////////////////////
+        // about resizing
+        var SizeState = {'initial': 1, 'resized': 2, 'minimized': 3};
+        var size_state = SizeState.initial;
+        var sizes = {};
+
+        function _resize(newstate) {
+            var width = sizes[newstate].width;
+            var height = sizes[newstate].height;
+
+            container.css('width', width);
+            container.css('height', height);
+            inner_container.css('height', height - $title_container.outerHeight());
+            inner_container.css('width', width);
+            that.notifyResize(width, height);
+        }
+
+        sizes[SizeState.minimized] = {'width': 400, 'height': 300};
+
         container.resize(function() {
             var width = container.innerWidth();
             var height = container.innerHeight();
             inner_container.css('height', height - $title_container.outerHeight());
             inner_container.css('width', width);
             that.notifyResize(width, height);
+
+            sizes[SizeState.resized] = {'width': width, 'height': height};
+            size_state = SizeState.resized;
+        });
+        $title_container.dblclick(function() {
+            switch (size_state) {
+            case SizeState.initial:
+                sizes[SizeState.resized] = {
+                    'width': inner_container.children().prop('scrollWidth'),
+                    'height': inner_container.children().prop('scrollHeight')
+                };
+                size_state = SizeState.minimized;
+                break;
+            case SizeState.resized:
+                sizes[SizeState.resized] = {
+                    'width': container.innerWidth(),
+                    'height': container.innerHeight()
+                };
+                size_state = SizeState.minimized;
+                break;
+            case SizeState.minimized:
+                size_state = SizeState.resized;
+                break;
+            }
+            _resize(size_state);
         });
 
         this.close = function() {
