@@ -16,13 +16,13 @@
     <script src="table.js"></script>
     <script src="highcharts.js"></script>
     <script src="exporting.js"></script>
-    <script src="web_table.js"></script>
+    <script src="webtable.js"></script>
     <script src="toolbar.js"></script>
     <script>
      $(function() {
-         var web_table = new $.WebTable();
-         var toolbar = new $.Toolbar(web_table);
-         web_table.connect(toolbar.uri());
+         var webtable = new $.WebTable();
+         var toolbar = new $.Toolbar(webtable);
+         webtable.connect(toolbar.uri());
      });
     </script>
 </head>

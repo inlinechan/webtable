@@ -80,11 +80,11 @@ jQuery.extend({
                 var reader = new FileReader();
                 reader.onload = (function(theFile) {
                     return function(e) {
-                        var web_table = new $.WebTable();
+                        var webtable = new $.WebTable();
                         var lines = e.target.result.split(',\n');
                         lines.forEach(function(elem, i, ar) {
                             if (elem.length > 0)
-                                web_table.append(elem);
+                                webtable.append(elem);
                         });
                     };
                 })(file);
