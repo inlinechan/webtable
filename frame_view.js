@@ -37,6 +37,11 @@ jQuery.extend({
         // make it draggable
         function makeDraggable(element, handle) {
             dragObject(element[0], handle[0]);
+            handle.hover(function() {
+                $(this).css('cursor', 'move');
+            }, function () {
+                $(this).css('cursor', 'auto');
+            });
         }
         makeDraggable(container, $title_container);
 
