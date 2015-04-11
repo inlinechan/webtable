@@ -78,7 +78,9 @@
     background: transparent url('images/disconnect.png') no-repeat center;
 }
 .close {
-    width: 20px;
-    height: 20px;
-    /* background: transparent url('images/connect.png') no-repeat center; */
+    border: 0px;
+    width: 18px;
+    height: 18px;
+    background: transparent url('images/close.png') no-repeat center;
+    background-size: cover;
 }

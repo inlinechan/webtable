@@ -8,7 +8,7 @@ jQuery.extend({
         var container = $("<div></div>").addClass('FrameView');
         var inner_container = $("<div></div>").addClass('inner');
         var $title = $("<div>" + title + "</div>").addClass('title');
-        var $icons = $("<div><button id=\"close\" name=\"close\" class=\"close\">X</button></div>").addClass('icons');
+        var $icons = $("<div><button id=\"close\" name=\"close\" class=\"close\"></button></div>").addClass('icons');
         $icons.click(function() { that.close(); });
         $title.append($icons);
         $title.append($("<div>ID: " + id + "</div>").addClass('title_id'));
