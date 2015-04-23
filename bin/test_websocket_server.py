@@ -6,9 +6,10 @@
 from autobahn.asyncio.websocket import WebSocketServerProtocol, \
     WebSocketServerFactory
 
-import json
-import sys
 import functools
+import json
+import re
+import sys
 
 try:
     import asyncio
@@ -17,12 +18,20 @@ except ImportError:
     import trollius as asyncio
     from trollius import From
 
+
 class MyServerProtocol(WebSocketServerProtocol):
     @staticmethod
-    def handleStdin(input):
-        data = input.readline().strip()
-        print("Queue.put: {}".format(data))
-        asyncio.async(queue.put(data)) # Queue.put is a coroutine, so you can't call it directly.
+    def handleStdin(server, stream):
+        line = stream.readline().strip()
+        if re.match(r'^\s*$', line):
+            loop = asyncio.get_event_loop()
+            loop.remove_reader(sys.stdin)
+            server.close()
+            loop.close()
+            return
+
+        print("Queue.put: {}".format(line))
+        asyncio.async(queue.put(line)) # Queue.put is a coroutine, so you can't call it directly.
 
     @staticmethod
     @asyncio.coroutine
@@ -54,7 +63,7 @@ class MyServerProtocol(WebSocketServerProtocol):
         print("WebSocket connection open.")
         CONNECTIONS.append(self)
         loop = asyncio.get_event_loop()
-        loop.add_reader(sys.stdin, functools.partial(MyServerProtocol.handleStdin, sys.stdin))
+        loop.add_reader(sys.stdin, functools.partial(MyServerProtocol.handleStdin, self, sys.stdin))
 
     def onMessage(self, payload, isBinary):
         print("Received: {}".format(payload))
@@ -77,16 +86,19 @@ if __name__ == '__main__':
     # import logging
     # logging.basicConfig(level=logging.DEBUG)
 
+    port="7778"
+    if len(sys.argv) == 2:
+        port = sys.argv[1]
+
     CONNECTIONS = []
     queue = asyncio.Queue()
 
-    PORT = "7778"
-    factory = WebSocketServerFactory("ws://localhost:{}".format(PORT), debug=False)
+    factory = WebSocketServerFactory("ws://localhost:{}".format(port), debug=False)
     factory.protocol = MyServerProtocol
 
     loop = asyncio.get_event_loop()
     # loop.add_reader(sys.stdin, functools.partial(handleStdin, sys.stdin))
-    coro = loop.create_server(factory, '127.0.0.1', int(PORT))
+    coro = loop.create_server(factory, '127.0.0.1', int(port))
     server = loop.run_until_complete(asyncio.wait(
         [coro, asyncio.async(MyServerProtocol.sendLine())]))
 
