@@ -28,6 +28,11 @@ jQuery.extend({
         });
         _webtable.addListener(button_listener);
 
+        $(uri_input_id).keyup(function(e) {
+            if (e.keyCode == 13)
+                $(connect_btn_id).trigger('click');
+        });
+
         $(connect_btn_id).click(function() {
             if ($(connect_btn_id).hasClass('connect'))
                 _webtable.connect($(uri_input_id).prop('value'));
