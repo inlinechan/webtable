@@ -58,6 +58,12 @@ jQuery.extend({
                     pointStart: 1
                 }
             },
+            tooltip: {
+                formatter: function() {
+                    // FIXME: Use first column's value hardcoded.
+                    return 'The value for <b>[' + this.x + '] ' + _data[this.x-1][0] + '</b> is ' + this.y + 'KB';
+                }
+            },
             series: initial_series
         });
 
