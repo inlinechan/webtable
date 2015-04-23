@@ -6,13 +6,24 @@ jQuery.extend({
 
         var nbr_of_series = data && data[0].length || 0;
         var series_data = new Array(nbr_of_series);
-        for (var i = 0 ; i < nbr_of_series; ++i) {
+
+        var valid_number_start_index = -1;
+        for (var i = 0; i < nbr_of_series; ++i) {
+            if ($.isNumeric(data[i])) {
+                valid_number_start_index = i;
+                break;
+            }
+        }
+
+        for (var i = 0; i < nbr_of_series; ++i) {
             var s = series_data[i] = [];
-            data.forEach(function(e, _i, ar) { s.push(Number(e[i])); });
+            data.forEach(function(e, _i, ar) {
+                s.push(Number(e[i]));
+            });
         }
         var initial_series = [];
         series_data.forEach(function(e, i, ar) {
-            initial_series.push({
+            i >= valid_number_start_index && initial_series.push({
                 'data': e,
                 'name': options.header[i] || 'series' + i
             });
