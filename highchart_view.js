@@ -9,11 +9,13 @@ jQuery.extend({
 
         var valid_number_start_index = -1;
         for (var i = 0; i < nbr_of_series; ++i) {
-            if ($.isNumeric(data[i])) {
+            if ($.isNumeric(data[0][i])) {
                 valid_number_start_index = i;
                 break;
             }
         }
+        if (valid_number_start_index == 0)
+            valid_number_start_index = -1;
 
         for (var i = 0; i < nbr_of_series; ++i) {
             var s = series_data[i] = [];
@@ -60,8 +62,10 @@ jQuery.extend({
             },
             tooltip: {
                 formatter: function() {
-                    // FIXME: Use first column's value hardcoded.
-                    return 'The value for <b>[' + this.x + '] ' + _data[this.x-1][0] + '</b> is ' + this.y + 'KB';
+                    var index_name = this.x;
+                    if (valid_number_start_index != -1)
+                        index_name += ': ' + this.series.name;
+                    return 'The value for <b>' + index_name + '</b> is ' + this.y + 'KB';
                 }
             },
             series: initial_series
