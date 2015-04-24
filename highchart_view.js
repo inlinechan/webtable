@@ -69,7 +69,8 @@ jQuery.extend({
 
         var count = 3;
         this.appendRow = function(items) {
-            items.forEach(function(e, i, ar) { series[i].addPoint(Number(e), true, false); });
+            // items.forEach(function(e, i, ar) { series[i].addPoint(Number(e), true, false); });
+            items.slice(valid_number_start_index+1).forEach(function(e, i, ar) { series[i].addPoint(Number(e), true, false); });
             count++;
         };
 
