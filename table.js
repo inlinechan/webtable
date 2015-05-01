@@ -13,7 +13,30 @@ jQuery.extend({
         var items = {
             "AddPlot": {name: "AddPlot", icon: "add"}
         };
-        frame.addContextMenu(null, null, items);
+        frame.addContextMenu(null, function() {
+            var data = model.data();
+            var plotId = 'plot' + view.id();
+
+            if ($('#' + plotId).length) {
+                console.log('#' + plotId + "is already exist");
+                return;
+            }
+
+            var title = model.name();
+            var plot = $("<div></div>").attr('id', plotId);
+            var container = new $.FrameView($('#plot_container'), plotId, title, plot);
+            var highchartView = new $.HighchartView('#' + plotId, data, {
+                'title': model.name(),
+                'header': model.header()
+            });
+            controller.addView(highchartView);
+            var frameViewListener = $.FrameViewListener({
+                resize: function(w, h) {
+                    highchartView.resize(w, h);
+                }
+            });
+            container.addListener(frameViewListener);
+        }, items);
 
         this.setHeader = function(header) {
             model.setHeader(header);
