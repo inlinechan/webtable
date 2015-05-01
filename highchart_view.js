@@ -7,28 +7,23 @@ jQuery.extend({
         var nbr_of_series = data && data[0].length || 0;
         var series_data = new Array(nbr_of_series);
 
-        var valid_number_start_index = -1;
-        for (var i = 0; i < nbr_of_series; ++i) {
-            if ($.isNumeric(data[0][i])) {
-                valid_number_start_index = i;
-                break;
-            }
-        }
-        if (valid_number_start_index == 0)
-            valid_number_start_index = -1;
-
         for (var i = 0; i < nbr_of_series; ++i) {
             var s = series_data[i] = [];
             data.forEach(function(e, _i, ar) {
                 s.push(Number(e[i]));
             });
         }
+        var remove_series = [];
         var initial_series = [];
         series_data.forEach(function(e, i, ar) {
-            i >= valid_number_start_index && initial_series.push({
-                'data': e,
-                'name': options.header[i] || 'series' + i
-            });
+            var isAllNumber = e.every(function(e, i, ar) { return $.isNumeric(e); });
+            if (isAllNumber) {
+                initial_series.push({
+                    'data': e,
+                    'name': options.header[i] || 'series' + i
+                });
+            } else
+                remove_series[i] = true;
         });
 
         var plot = $(parent).highcharts({
@@ -62,9 +57,7 @@ jQuery.extend({
             },
             tooltip: {
                 formatter: function() {
-                    var index_name = this.x;
-                    if (valid_number_start_index != -1)
-                        index_name += ': ' + this.series.name;
+                    var index_name = this.x + ': ' + this.series.name;
                     return 'The value for <b>' + index_name + '</b> is ' + this.y + 'KB';
                 }
             },
@@ -73,8 +66,14 @@ jQuery.extend({
 
         var count = 3;
         this.appendRow = function(items) {
-            // items.forEach(function(e, i, ar) { series[i].addPoint(Number(e), true, false); });
-            items.slice(valid_number_start_index+1).forEach(function(e, i, ar) { series[i].addPoint(Number(e), true, false); });
+            var valid_number_index = 0;
+            items.forEach(function(e, i, ar) {
+                if (!remove_series[i]) {
+                    var value = Number(e);
+                    series[valid_number_index].addPoint(!isNaN(value) ? value : -1, true, false);
+                    valid_number_index++;
+                }
+            });
             count++;
         };
 
