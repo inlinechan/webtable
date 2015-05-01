@@ -6,9 +6,6 @@ jQuery.extend({
         var lines = 1;
 
         var table = $("<table><thead></thead><tbody></tbody></table>").attr('id', 'table' + id).addClass('tableview');
-        table.dblclick(function() {
-            that.notifyDblClick();
-        });
 
         this.id = function() {
             return id;
@@ -41,21 +38,5 @@ jQuery.extend({
             tr.append(tds);
             table.append(tr);
         };
-
-        this.addListener = function(list) {
-            listeners.push(list);
-        };
-
-        this.notifyDblClick = function() {
-            $.each(listeners, function(i) {
-                listeners[i].dblclick();
-            });
-        };
-    },
-    TableViewListener: function(list) {
-        if (!list) list = {};
-        return $.extend({
-            dblclick: function() {}
-        }, list);
     }
 });
