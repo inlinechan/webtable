@@ -90,6 +90,27 @@ jQuery.extend({
         }
         makeDraggable(container, $title_container);
 
+        this.addContextMenu = function(selector, callback, items) {
+            var _selector = selector || '.FrameView .title';
+            var _callback = callback || function(key, options) {
+                var m = "clicked: " + key;
+                console.log(m);
+            };
+            var _items = items || {
+                "edit": {name: "Edit", icon: "edit"},
+                "cut": {name: "Cut", icon: "cut"},
+                "copy": {name: "Copy", icon: "copy"},
+                "paste": {name: "Paste", icon: "paste"},
+                "delete": {name: "Delete", icon: "delete"},
+                "sep1": "---------",
+                "quit": {name: "Quit", icon: "quit"}
+            };
+            $.contextMenu({
+                selector: _selector,
+                callback: _callback,
+                items: _items
+            });
+        };
         this.id = function() {
             return id;
         };

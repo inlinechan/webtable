@@ -8,6 +8,13 @@ jQuery.extend({
         var frame = new $.FrameView($(container || '#table_container'), id, name, view.view());
         var controller = new $.TableController(model, view);
 
+        ////////////////////////////////////////////////////////////////////////////////
+        // context menu
+        var items = {
+            "AddPlot": {name: "AddPlot", icon: "add"}
+        };
+        frame.addContextMenu(null, null, items);
+
         this.setHeader = function(header) {
             model.setHeader(header);
             view.setHeader(header);
