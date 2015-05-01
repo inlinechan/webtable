@@ -2,19 +2,9 @@
 #+TODO: TODO INPROGRESS | DONE CANCELED
 
 * Todo
-** DONE Append table name
-   CLOSED: [2015-02-16 Mon 17:24]
-   - CLOSING NOTE [2015-02-16 Mon 17:24] \\
-     Implemented
-** DONE Support multiple set of table and highchart
-   CLOSED: [2015-02-18 Wed 16:57]
-   - CLOSING NOTE [2015-02-18 Wed 16:57] \\
-     Now support multiple set of table and hightchart
-** TODO Implement 'overflow table'
-** DONE View should have titlebar having drag handle
-   CLOSED: [2015-02-19 Thu 16:02]
-   - CLOSING NOTE [2015-02-19 Thu 16:02] \\
-     Implemented add title and title as drag handle
+** INPROGRESS Add context menu to provide highchart option from table_view by jquery context menu plugin
+** TODO Support CSS3 animation by jquery.transit plugin
+** TODO Change HighchartView's title by changing model name
 * Done
 ** DONE Create single table
 ** DONE Create multiple tables
@@ -25,3 +15,19 @@
    CLOSED: [2015-02-16 Mon 16:55]
    - CLOSING NOTE [2015-02-16 Mon 16:55] \\
      Simple table has been integrated
+** DONE Append table name
+   CLOSED: [2015-02-16 Mon 17:24]
+   - CLOSING NOTE [2015-02-16 Mon 17:24] \\
+     Implemented
+** DONE Support multiple set of table and highchart
+   CLOSED: [2015-02-18 Wed 16:57]
+   - CLOSING NOTE [2015-02-18 Wed 16:57] \\
+     Now support multiple set of table and hightchart
+** DONE Implement 'overflow table'
+   CLOSED: [2015-05-01 Fri 14:41]
+   - CLOSING NOTE [2015-05-01 Fri 14:41] \\
+     Won't fix
+** DONE View should have titlebar having drag handle
+   CLOSED: [2015-02-19 Thu 16:02]
+   - CLOSING NOTE [2015-02-19 Thu 16:02] \\
+     Implemented add title and title as drag handle
