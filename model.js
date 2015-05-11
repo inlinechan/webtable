@@ -4,14 +4,20 @@ jQuery.extend({
         var listeners = new Array();
         var data = new Array();
         var _header;
+        var _name = name;
 
         // Return cloned data
         this.data = function() {
             return data.slice();
         };
 
-        this.name = function() {
-            return name;
+        this.name = function(newName) {
+            if (newName != null) {
+                that._name = newName;
+                return that;
+            } else {
+                return that._name;
+            }
         };
 
         this.append = function(arr) {
@@ -28,6 +34,11 @@ jQuery.extend({
                 listeners[i].appendItem(item);
             });
         };
+        this.notifyNameChanged = function(name) {
+            $.each(listeners, function(i) {
+                listeners[i].nameChanged(name);
+            });
+        };
         this.length = function() {
             return data.length;
         };
@@ -41,7 +52,8 @@ jQuery.extend({
     ModelListener: function(list) {
         if (!list) list = {};
         return $.extend({
-            appendItem : function() {}
+            appendItem : function(item) {},
+            nameChanged: function(name) {}
         }, list);
     }
 });

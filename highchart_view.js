@@ -81,5 +81,9 @@ jQuery.extend({
             $(parent).width(w - 30).height(h - 20);
             $(parent).highcharts().reflow();
         };
+
+        this.setTitle = function(title) {
+            $(parent).highcharts().setTitle({text: title});
+        };
     }
 });

@@ -36,6 +36,8 @@ jQuery.extend({
         $title.change(function() {
             if (/^\s*$/.test($title.html()))
                 $title.html("Untitled");
+
+            that.notifyTitleChange($title.html());
         });
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -164,12 +166,19 @@ jQuery.extend({
                 listeners[i].resize(w, h);
             });
         };
+
+        this.notifyTitleChange = function(title) {
+            $.each(listeners, function(i) {
+                listeners[i].titleChanged(title);
+            });
+        };
     },
     FrameViewListener: function(list) {
         if (!list) list = {};
         return $.extend({
             dblclick: function() {},
-            resize: function(w, h) {}
+            resize: function(w, h) {},
+            titleChanged: function(title) {}
         }, list);
     }
 });

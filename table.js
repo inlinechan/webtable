@@ -33,10 +33,20 @@ jQuery.extend({
             var frameViewListener = $.FrameViewListener({
                 resize: function(w, h) {
                     highchartView.resize(w, h);
+                },
+                titleChanged: function(title) {
+                    highchartView.setTitle(title);
                 }
             });
             container.addListener(frameViewListener);
         }, items);
+
+        var frameViewListener = $.FrameViewListener({
+            titleChanged: function(title) {
+                model.name(title);
+            }
+        });
+        frame.addListener(frameViewListener);
 
         this.setHeader = function(header) {
             model.setHeader(header);
