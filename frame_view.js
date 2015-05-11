@@ -156,20 +156,20 @@ jQuery.extend({
         };
 
         this.notifyDblClick = function() {
-            $.each(listeners, function(i) {
-                listeners[i].dblclick();
+            $.each(listeners, function(i, e) {
+                e.dblclick();
             });
         };
 
         this.notifyResize = function(w, h) {
-            $.each(listeners, function(i) {
-                listeners[i].resize(w, h);
+            $.each(listeners, function(i, e) {
+                e.resize(w, h);
             });
         };
 
         this.notifyTitleChange = function(title) {
-            $.each(listeners, function(i) {
-                listeners[i].titleChanged(title);
+            $.each(listeners, function(i, e) {
+                e.titleChanged(title);
             });
         };
     },

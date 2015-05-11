@@ -55,20 +55,20 @@ jQuery.extend({
 
         // --------------------------------------------------------------------------------
         function notifyOpen(event) {
-            $.each(listeners, function(i) {
-                listeners[i].onopen(event, socket);
+            $.each(listeners, function(i, e) {
+                e.onopen(event, socket);
             });
         };
 
         function notifyClose(event) {
-            $.each(listeners, function(i) {
-                listeners[i].onclose(event, socket);
+            $.each(listeners, function(i, e) {
+                e.onclose(event, socket);
             });
         };
 
         function notifyMessage(msg) {
-            $.each(listeners, function(i) {
-                listeners[i].onmessage(msg);
+            $.each(listeners, function(i, e) {
+                e.onmessage(msg);
             });
         };
 

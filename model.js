@@ -30,13 +30,13 @@ jQuery.extend({
         };
 
         this.notifyItemAppended = function(item) {
-            $.each(listeners, function(i) {
-                listeners[i].appendItem(item);
+            $.each(listeners, function(i, e) {
+                e.appendItem(item);
             });
         };
         this.notifyNameChanged = function(name) {
-            $.each(listeners, function(i) {
-                listeners[i].nameChanged(name);
+            $.each(listeners, function(i, e) {
+                e.nameChanged(name);
             });
         };
         this.length = function() {
