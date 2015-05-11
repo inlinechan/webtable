@@ -59,6 +59,12 @@ jQuery.extend({
 
         this.append = function(row) {
             model.append(row);
+
+            // http://stackoverflow.com/a/11715670/2229134
+            // Scroll to the bottom: HARD CODED
+            var $parent = view.view().parent();
+            $parent.stop();
+            $parent.animate({scrollTop: $parent[0].scrollHeight}, 500);
         };
 
         this.addView = function(view) {
