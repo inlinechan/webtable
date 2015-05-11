@@ -1,4 +1,3 @@
-// require drag.js
 jQuery.extend({
     FrameView: function($parent, id, title, $content) {
         var that = this;
@@ -81,7 +80,20 @@ jQuery.extend({
 
         // make it draggable
         function makeDraggable(element, handle) {
-            dragObject(element[0], handle[0]);
+            // http://mdqinc.com/blog/2013/01/css3-transforms-vs-jquery-draggable/
+            $(container).draggable({
+                handle: handle,
+                start: function() {
+                    /* Temporarily revert the transform so drag and dropping works as expected */
+                    var parentRect = $(this).parent()[0].getBoundingClientRect();
+                    var rect = this.getBoundingClientRect();
+                    $(this).css('transition', 'all 0 ease 0');
+                    $(this).css('transform', 'none');
+                    $(this).css('left', rect['left']-parentRect['left']);
+                },
+                stop: function() {
+                }
+            });
             handle.hover(function() {
                 $(this).css('cursor', 'move');
             }, function () {
