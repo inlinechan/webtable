@@ -20,6 +20,24 @@ jQuery.extend({
         container.resizable({minWidth: 400, minHeight: 300});
         $parent.append(container);
 
+        // http://stackoverflow.com/a/14027188/2229134
+        $title.on('focus', function() {
+            var $this = $(this);
+            $this.data('before', $this.html());
+            return $this;
+        }).on('blur keyup paste', function() {
+            var $this = $(this);
+            if ($this.data('before') !== $this.html()) {
+                $this.data('before', $this.html());
+                $this.trigger('change');
+            }
+            return $this;
+        });
+        $title.change(function() {
+            if (/^\s*$/.test($title.html()))
+                $title.html("Untitled");
+        });
+
         ////////////////////////////////////////////////////////////////////////////////
         // about resizing
         var SizeState = {'initial': 1, 'resized': 2, 'minimized': 3};
