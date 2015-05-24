@@ -50,3 +50,11 @@ it sends JSON RPC 2.0 commands through websocket.
 
 * How it works
   TODO
+
+* License
+  - Webtable follows GPL v3. See LICENSE.
+  - Other libraries are followed their own license.
+    - jQuery-contextMenu
+      https://github.com/medialize/jQuery-contextMenu
+    - Highchart
+      http://www.highcharts.com/license
