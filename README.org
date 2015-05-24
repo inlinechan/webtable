@@ -5,6 +5,9 @@ webtable is to show some data in plot from as well as in tabular form.
 Data source can be stdin or multiple files or from program as long as
 it sends JSON RPC 2.0 commands through websocket.
 
+* Screenshots
+  [[./doc/Webtable_population_screenshot.png]]
+
 * Prerequisites
 ** For server
 
