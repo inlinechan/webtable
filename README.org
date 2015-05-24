@@ -6,32 +6,47 @@ Data source can be stdin or multiple files or from program as long as
 it sends JSON RPC 2.0 commands through websocket.
 
 * Prerequisites
-** For server(test_nodejs_server.js)
-   1. nodejs
-   2. tail, nodejs-websocket, line-reader, readline
+** For server
+
+*** bin/test_nodejs_server.js
+    1. nodejs
+    2. tail, nodejs-websocket, line-reader, readline
+       #+BEGIN_EXAMPLE
+       $ npm install tail nodejs-websocket line-reader readline
+       #+END_EXAMPLE
+
+*** bin/test_websocket_server.py
+    1. python 2.7
+    2. autobahn trollius
+       #+BEGIN_EXAMPLE
+       $ pip install autobahn trollius --user # if non-root
+       #+END_EXAMPLE
 
 ** For client
    1. Place this project into web server root
    2. Or run simply webserver by
       #+BEGIN_EXAMPLE
+      $ cd /path/to/webtable
       $ python -m SimpleHTTPServer
       #+END_EXAMPLE
 
 * How to run
   1. Run simple webserver
      #+BEGIN_EXAMPLE
+     $ cd /path/to/webtable
      $ python -m SimpleHTTPServer
      Serving HTTP on 0.0.0.0 port 8000
      #+END_EXAMPLE
   2. (Server) Run nodejs test server to send
      #+BEGIN_EXAMPLE
-     $ npm tail nodejs-websocket line-reader readline
-     $ ./meminfo.sh | nodejs test_nodejs_server.js
+       # Pass any data through pipe
+       $ ./meminfo.sh | nodejs test_nodejs_server.js
      #+END_EXAMPLE
   3. (Client) Go to http://localhost:8000/webtable.html in your web
-     browser. Recommends Chrome or Firefox.
-  4. You'll some rows in the table.
-  5. You'll see Highchart by double clicking table column.
+     browser. Recommends Chrome or Firefox. Unfortunately, it hasn't
+     tested any other browser such as IE.
+  4. You'll see some rows in the table.
+  5. You'll see Highchart by right clicking in the frame title.
 
 * How it works
   TODO
