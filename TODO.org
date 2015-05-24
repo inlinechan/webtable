@@ -2,9 +2,15 @@
 #+TODO: TODO INPROGRESS | DONE CANCELED
 
 * Todo
-** INPROGRESS Add context menu to provide highchart option from table_view by jquery context menu plugin
+** DONE Add context menu to provide highchart option from table_view by jquery context menu plugin
+   CLOSED: [2015-05-24 Sun 15:12]
+   - CLOSING NOTE [2015-05-24 Sun 15:12] \\
+     Done in 64280c8
 ** TODO Support CSS3 animation by jquery.transit plugin
-** TODO Change HighchartView's title by changing model name
+** DONE Change HighchartView's title by changing model name
+   CLOSED: [2015-05-24 Sun 15:12]
+   - CLOSING NOTE [2015-05-24 Sun 15:12] \\
+     Done in 5196e2e
 * Done
 ** DONE Create single table
 ** DONE Create multiple tables
