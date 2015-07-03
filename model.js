@@ -20,7 +20,9 @@ jQuery.extend({
         var listeners = new Array();
         var data = new Array();
         var _header;
-        var _name = name;
+        var _name;
+
+        that._name = name;
 
         // Return cloned data
         this.data = function() {
